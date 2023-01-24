@@ -5,7 +5,14 @@
   "singleQuote": true,
   "printWidth": 120,
   "proseWrap": "always",
-  "importOrder": ["^api/(.*)$", "^src/(.*)$", "^[./]"],
+  "importOrder": [
+    "^packages/(.*)$",
+    "^src/data/(.*)$",
+    "^src/common/(.*)$",
+    "^src/features/(.*)$",
+    "^src/(.*)$",
+    "^[./]"
+  ],
   "importOrderParserPlugins": ["typescript", "decorators-legacy"],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
