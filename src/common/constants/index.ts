@@ -1,4 +1,4 @@
-import { ChainId } from 'src/common/constants/enum'
+import { ChainId } from 'src/common/enums'
 import { ChainInfo } from 'src/common/interfaces'
 
 export const SUPPORTED_CHAINS: Record<ChainId, ChainInfo> = {
