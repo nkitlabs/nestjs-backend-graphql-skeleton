@@ -18,7 +18,6 @@ export class ContentService {
   }
 
   async createContent(input: CreateContentInput): Promise<Content | null> {
-    console.log('!!!', input)
     return this.prisma.content.create({
       data: input,
     })
