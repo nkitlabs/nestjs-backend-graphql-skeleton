@@ -1,6 +1,7 @@
 import { get } from 'lodash'
 
-import { SUPPORTED_CHAINS } from 'src/common/constants/constants'
+import { SUPPORTED_CHAINS } from 'src/common/constants'
+
 import { Config } from 'src/config/config'
 
 export const config = (): Config => {
