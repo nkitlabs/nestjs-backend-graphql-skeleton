@@ -1,12 +1,18 @@
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { Module, ValidationPipe } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { APP_PIPE } from '@nestjs/core'
-import { TypeOrmModule } from '@nestjs/typeorm'
+import { GraphQLModule } from '@nestjs/graphql'
+import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core'
+import { join } from 'path'
+
+import { ContentModule } from 'src/features/content/content.module'
 
 import { AppController } from 'src/app.controller'
 import { AppService } from 'src/app.service'
 import { config } from 'src/config'
-import { getTypeOrmConfig } from 'src/db/db.util'
+
+import { PrismaModule } from './prisma/prisma.module'
 
 @Module({
   imports: [
@@ -16,7 +22,16 @@ import { getTypeOrmConfig } from 'src/db/db.util'
       load: [config],
       isGlobal: true,
     }),
-    // TypeOrmModule.forRoot(getTypeOrmConfig()),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: join(process.cwd(), 'src/schema.graphql'),
+      sortSchema: true,
+      playground: process.env.NODE_ENV === 'development',
+      introspection: true,
+      plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+    }),
+    PrismaModule,
+    ContentModule,
   ],
   controllers: [AppController],
   providers: [

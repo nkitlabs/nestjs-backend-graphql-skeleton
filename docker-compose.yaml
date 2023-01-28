@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    restart: always
+    container_name: skeleton-backend
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: prisma
+      POSTGRES_PASSWORD: prisma
+      POSTGRES_DB: skeleton_backend
+
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - cache:/data
+
+  cloud-storage:
+    image: fsouza/fake-gcs-server
+    restart: always
+    command: -scheme http
+    ports:
+      - '4443:4443'
+    volumes:
+      - storage_data:/storage
+
+volumes:
+  cache:
+    driver: local
+  storage_data:

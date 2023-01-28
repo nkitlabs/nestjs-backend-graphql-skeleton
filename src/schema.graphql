@@ -1,0 +1,53 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Content {
+  """data inside the content"""
+  content: String!
+
+  """unix timestamp at the creation of the content"""
+  createdAt: Float!
+
+  """content id"""
+  id: Int!
+
+  """data inside the content"""
+  published: Boolean!
+
+  """title of the content"""
+  title: String!
+}
+
+input CreateContentInput {
+  """data inside the content"""
+  content: String!
+
+  """title of the content"""
+  title: String!
+}
+
+type Mutation {
+  createContent(input: CreateContentInput!): Content!
+  deleteContent(id: String!): Content!
+  updateContent(input: UpdateContentInput!): Content!
+}
+
+type Query {
+  content(id: String!): Content!
+  contents: [Content!]!
+}
+
+input UpdateContentInput {
+  """data inside the content"""
+  content: String!
+
+  """content id"""
+  id: Int!
+
+  """data inside the content"""
+  published: Boolean!
+
+  """title of the content"""
+  title: String!
+}
